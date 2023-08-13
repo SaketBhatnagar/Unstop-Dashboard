@@ -14,9 +14,18 @@ import { TbClockHour5 } from "react-icons/tb";
 
 const Main = props => {
   const [hideform, setHideForm] = useState(false);
+
   const [hideAssessment, setAssessment] = useState(false);
 
+  //! ---------- handleForm ---------
+  //! used to show and hide the form.
+  // - applied this handler at whole New Assessment card .
+
   const handleForm = e => {
+    //! ------------- below logic ------------
+    //! we have applied class "close" and "open-form" to icons to show and hide.
+    // - if elements class has class - close -> close the form
+    // - if elements class has class - open-form -> open the form
     if (
       "close" ===
       Array.from(e.target.classList).filter(val => val === "close")[0]
@@ -29,7 +38,10 @@ const Main = props => {
       setHideForm(true);
   };
 
+  //! --------- handleAssementOverview -----
+  // used to show and hide the assessment overview on mobile
   const handleAssementOverview = e => {
+    // hideAssessment using this state to toggle Assessment section , here we apply Tailwind conditionally
     setAssessment(!hideAssessment);
   };
 
@@ -38,19 +50,19 @@ const Main = props => {
       <section className="bg-white w-[100%] h-[100vh] text-[#1c4980] ">
         <article className="flex gap-3 items-center lg:hidden pt-5 px-5">
           <span
-            className="bg-[#f2f8fe] p-2 rounded-full open-form"
+            className="bg-[#f2f8fe] p-2 rounded-full open-nav"
             onClick={props.handleNav}
           >
             <BiMenuAltLeft
-              className="text-3xl open-form"
+              className="text-3xl open-nav"
               onClick={props.handleNav}
             />
           </span>
 
           <h1 className="text-xl font-semibold">Assessment</h1>
         </article>
-        <article className="flex items-center lg:h-24 sm:h-16 border-b-2 sm:flex-row-reverse lg:flex-row sm:justify-end  lg:justify-start">
-          <h2 className=" py-2 border-r-2 lg:text-2xl sm:font-semibold px-6 sm:flex-1  lg:flex-grow-0 sm:text-[#4c6f9a] lg:text-[#1c4980] text-center">
+        <article className="flex items-center lg:h-24 sm:h-16 border-b-2 sm:flex-row-reverse lg:flex-row sm:justify-end lg:justify-start">
+          <h2 className="py-2 border-r-2 lg:text-2xl sm:font-semibold px-6 sm:flex-1  lg:flex-grow-0 sm:text-[#4c6f9a] lg:text-[#1c4980] text-center">
             <span className="lg:hidden">Unstop </span>
             Assesments
           </h2>
@@ -213,7 +225,8 @@ const Main = props => {
                 MCQ,subjective(text or paragraph)!
               </p>
             </div>
-            {/* -------------- */}
+            {/* ---------------------- */}
+            {/* We can dynamically generate these cards. As per figma design is */}
             <div className="flex flex-col bg-white border-2  rounded-3xl sm:w-[90vw] lg:w-[26rem] py-5 px-4 lg:h-60 sm:h-[initial] relative">
               <div className="flex justify-between h-7 ">
                 <div className="text-xl pt-3 flex items-center gap-3">
@@ -266,7 +279,6 @@ const Main = props => {
               </div>
             </div>
 
-            {/* ---------- */}
             <div className="flex flex-col bg-white border-2  rounded-3xl sm:w-[90vw] lg:w-[26rem] py-5 px-4 lg:h-60 sm:h-[initial] relative">
               <div className="flex justify-between h-7 ">
                 <div className="text-xl pt-3 flex items-center gap-3">
@@ -327,8 +339,10 @@ const Main = props => {
               </div>
             </div>
           </div>
+          {/* ------------------------- */}
         </article>
 
+        {/* using portal to display form */}
         {hideform &&
           ReactDOM.createPortal(
             <section

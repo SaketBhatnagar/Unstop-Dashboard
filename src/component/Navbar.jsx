@@ -19,7 +19,7 @@ const Navbar = ({ hideNav, handleNav }) => {
             <span className="text-base">Menu</span>
             <span className=" p-2 rounded-full close" onClick={handleNav}>
               <CgClose
-                className="text-2xl font-semibold close  p-1"
+                className="text-2xl font-semibold close p-1"
                 onClick={handleNav}
               />
             </span>
